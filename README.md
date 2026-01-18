@@ -130,6 +130,25 @@ Beyond model training, this repository now includes a comprehensive framework fo
 - **A/B Testing**: Compare prompt versions with parallel evaluation
 - **Production Ready**: Integration with Model Serving and continuous monitoring
 
+### Installation
+
+This project uses [uv](https://github.com/astral-sh/uv) for fast, reliable Python package management.
+
+```bash
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clone and install
+git clone https://github.com/LaurentPRAT-DB/dolly_lpt.git
+cd dolly_lpt
+make install-dev
+
+# Or use uv directly
+uv sync
+```
+
+See [UV_USAGE.md](UV_USAGE.md) for complete uv documentation.
+
 ### Quick Start
 
 See [GENAI_QUICKSTART.md](GENAI_QUICKSTART.md) for a 5-minute getting started guide.
