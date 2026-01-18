@@ -1,8 +1,46 @@
+# Databricks
 .dbx/
+
+# Python virtual environments
 venv/
 .venv/
 .python-version
+
+# Python cache
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Testing
 htmlcov/
 .pytest_cache/
 .coverage
+.coverage.*
+*.cover
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Linting
+.ruff_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Note: uv.lock should be committed for reproducible builds
