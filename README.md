@@ -118,6 +118,54 @@ To run on V100 instances with 32GB of GPU memory (ex: `p3dn.24xlarge` or `Standa
 
 With 8 V100s, an epoch completes in about 3.5 hours. Note that the resulting model may be slightly different when trained with `fp16` versus `bf16`.
 
+## GenAI Evaluation Framework
+
+Beyond model training, this repository now includes a comprehensive framework for prompt management and RAG evaluation on Databricks.
+
+### Features
+
+- **Prompt Management**: Store and version prompts in Unity Catalog with MLflow tracking
+- **LLM-as-Judge Evaluation**: Evaluate RAG applications using foundation models
+- **Multiple Metrics**: Faithfulness, relevance, groundedness, and completeness
+- **A/B Testing**: Compare prompt versions with parallel evaluation
+- **Production Ready**: Integration with Model Serving and continuous monitoring
+
+### Quick Start
+
+See [GENAI_QUICKSTART.md](GENAI_QUICKSTART.md) for a 5-minute getting started guide.
+
+```python
+from genai_evaluation.prompt_manager import PromptManager
+from genai_evaluation.rag_evaluator import LLMJudge, RAGExample
+
+# Register a prompt
+pm = PromptManager(catalog="main", schema="prompts")
+prompt = pm.register_prompt(
+    name="rag_qa",
+    template="Context: {context}\n\nQuestion: {question}\n\nAnswer:",
+    parameters=["context", "question"]
+)
+
+# Evaluate RAG output
+judge = LLMJudge(model_name="databricks-meta-llama-3-70b-instruct")
+example = RAGExample(
+    question="What is machine learning?",
+    context="ML is a branch of AI...",
+    answer="Machine learning is..."
+)
+result = judge.evaluate_faithfulness(
+    example.question, example.context, example.answer
+)
+print(f"Faithfulness: {result.score:.2f}")
+```
+
+### Documentation
+
+- [Quick Start Guide](GENAI_QUICKSTART.md) - Get started in 5 minutes
+- [Full Documentation](genai_evaluation/README.md) - Complete framework guide
+- [Example Notebook](examples/prompt_management_evaluation_example.py) - End-to-end walkthrough
+- [Configuration](genai_evaluation/config.py) - Customize settings
+
 ## Running Unit Tests Locally
 
 ```
